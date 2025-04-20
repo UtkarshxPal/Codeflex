@@ -22,7 +22,7 @@ function Navbar() {
 
         // Send user data and token to backend via axios
         const response = await axios.post(
-          "http://localhost:3000/api/protected-route",
+          "https://codeflex-wjlg.onrender.com/api/protected-route",
           { token, user },
           {
             headers: {
