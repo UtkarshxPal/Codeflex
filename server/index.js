@@ -27,6 +27,7 @@ app.use(
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.text());
 
 // Connect to MongoDB
 connectToMongoDb(process.env.MONGODB_URI);
@@ -61,25 +62,12 @@ app.post("/api/protected-route", checkJwt, async (req, res) => {
 
 // AI Plan Generation Route
 
-app.post("/vapi/generate-program", async (req, res) => {
-  console.log("🔍 Vapi Headers:", req.headers);
-  console.log("🔍 Vapi Body:", req.body);
-  let rawData = "";
-  req.on("data", (chunk) => {
-    rawData += chunk;
-  });
-  req.on("end", () => {
-    console.log("🧪 Raw Data from Vapi:", rawData);
-
-    try {
-      const parsedBody = JSON.parse(rawData);
-      console.log("✅ Parsed JSON:", parsedBody);
-    } catch (err) {
-      console.error("❌ JSON Parse Error:", err.message);
-    }
-  });
-
+app.post("/vapi/generate-program", express.text(), async (req, res) => {
   try {
+    // const parsedBody = JSON.parse(req.body);
+
+    console.log(req.body);
+
     const {
       age,
       weight,
@@ -181,7 +169,7 @@ app.post("/vapi/generate-program", async (req, res) => {
     let dietPlan = JSON.parse(dietResultText);
     dietPlan = validateDietPlan(dietPlan);
 
-    const plan = Plan.create({
+    const plan = await Plan.create({
       userId: req.body.userId,
       name: `${fitness_goal} Plan`,
       workoutPlan,
