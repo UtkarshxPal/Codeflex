@@ -62,7 +62,7 @@ app.post("/api/protected-route", checkJwt, async (req, res) => {
 // AI Plan Generation Route
 
 app.post("/vapi/generate-program", async (req, res) => {
-  console.log("Bhai ye rahi bady ye sab bheja h vapi ne", req.body);
+  console.log("Bhai ye rahi bady ye sab bheja h vapi ne", req);
   try {
     const {
       age,
