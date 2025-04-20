@@ -49,10 +49,10 @@ const planSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true,
+    // required: true,
     index: true,
   },
-  name: { type: String, required: true },
+  name: { type: String },
   workoutPlan: workoutPlanSchema,
   dietPlan: dietPlanSchema,
   isActive: { type: Boolean, index: true, default: true },

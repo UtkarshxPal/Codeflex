@@ -5,6 +5,9 @@ import { Button } from "./ui/button";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
+const BASE_URL = "https://codeflex-wjlg.onrender.com";
+// const BASE_URL = "http://localhost:3000";
+
 function Navbar() {
   const {
     loginWithRedirect,
@@ -22,7 +25,7 @@ function Navbar() {
 
         // Send user data and token to backend via axios
         const response = await axios.post(
-          "https://codeflex-wjlg.onrender.com/api/protected-route",
+          `${BASE_URL}/api/protected-route`,
           { token, user },
           {
             headers: {
