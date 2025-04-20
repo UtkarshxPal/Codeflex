@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
 const BASE_URL = "https://codeflex-wjlg.onrender.com";
-// const BASE_URL = "http://localhost:3000";
+// const BASE_URL = "http://localhost:5000";
 
 function Navbar() {
   const {

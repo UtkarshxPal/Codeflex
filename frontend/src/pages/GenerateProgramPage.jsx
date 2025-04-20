@@ -27,17 +27,17 @@ function GenerateProgramPage() {
   }, [messages]);
 
   //navigate user to Profile page after the call ends
-  useEffect(() => {
-    if (callEnded) {
-      const redirectTimer = setTimeout(() => {
-        navigate("/profile");
-      }, 1500);
+  // useEffect(() => {
+  //   if (callEnded) {
+  //     const redirectTimer = setTimeout(() => {
+  //       navigate("/profile");
+  //     }, 1500);
 
-      return () => {
-        clearTimeout(redirectTimer);
-      };
-    }
-  }, [callEnded, navigate]);
+  //     return () => {
+  //       clearTimeout(redirectTimer);
+  //     };
+  //   }
+  // }, [callEnded, navigate]);
 
   // setup event listeners for vapi
   useEffect(() => {
