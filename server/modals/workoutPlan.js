@@ -45,18 +45,20 @@ const dietPlanSchema = new mongoose.Schema(
   { _id: false }
 );
 
-const planSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    // required: true,
-    index: true,
+const planSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: String,
+      required: true,
+      index: true,
+    },
+    name: { type: String },
+    workoutPlan: workoutPlanSchema,
+    dietPlan: dietPlanSchema,
+    isActive: { type: Boolean, index: true, default: true },
   },
-  name: { type: String },
-  workoutPlan: workoutPlanSchema,
-  dietPlan: dietPlanSchema,
-  isActive: { type: Boolean, index: true, default: true },
-});
+  { timestamps: true }
+);
 
 const Plan = mongoose.model("Plan", planSchema);
 

@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import GenerateProgramPage from "./pages/GenerateProgramPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/generate" element={<GenerateProgramPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </main>
       </BrowserRouter>

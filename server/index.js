@@ -69,6 +69,7 @@ app.post("/vapi/generate-program", express.text(), async (req, res) => {
     console.log(req.body);
 
     const {
+      user_id,
       age,
       weight,
       injuries,
@@ -169,9 +170,14 @@ app.post("/vapi/generate-program", express.text(), async (req, res) => {
     let dietPlan = JSON.parse(dietResultText);
     dietPlan = validateDietPlan(dietPlan);
 
+    await Plan.updateMany(
+      { userID: user_id, isActive: true },
+      { $set: { isActive: false } }
+    );
+
     const plan = await Plan.create({
-      userId: req.body.userId,
-      name: `${fitness_goal} Plan`,
+      userId: user_id,
+      name: `${fitness_goal} Plan - ${new Date().toLocaleDateString()}`,
       workoutPlan,
       dietPlan,
     });
@@ -187,6 +193,24 @@ app.post("/vapi/generate-program", express.text(), async (req, res) => {
     return res
       .status(500)
       .json({ message: "Could not generate plans", error: error.message });
+  }
+});
+
+app.get("/getplans/:id", async (req, res) => {
+  try {
+    const id = req.params;
+    if (!id) {
+      return res.status(404).json({ message: "Please provide ID" });
+    }
+
+    const plans = await Plan.find({ userId: id }).sort({ createdAt: -1 });
+    return res
+      .status(200)
+      .json({ plans: plans, message: "Fetched Plans succesfully" });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Could not find plans for", id, error: error });
   }
 });
 
