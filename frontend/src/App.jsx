@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import GenerateProgramPage from "./pages/GenerateProgramPage";
 import ProfilePage from "./pages/ProfilePage";
+import { useAuth0 } from "@auth0/auth0-react";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -19,10 +21,23 @@ function App() {
         <main className="pt-24 flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/generate" element={<GenerateProgramPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
+
+            <Route
+              path="/generate"
+              element={
+                <ProtectedRoute>
+                  <GenerateProgramPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
       </BrowserRouter>

@@ -16,9 +16,10 @@ import {
   ShieldIcon,
 } from "lucide-react";
 import { USER_PROGRAMS } from "../constants/index";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const UserPrograms = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full pb-24 pt-16 relative">
       <div className="container mx-auto max-w-6xl px-4">
@@ -201,7 +202,7 @@ const UserPrograms = () => {
 
         {/* CTA section */}
         <div className="mt-16 text-center">
-          <Link href="/generate-program">
+          <Link to="/generate">
             <Button
               size="lg"
               className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg"

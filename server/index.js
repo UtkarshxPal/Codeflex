@@ -62,7 +62,7 @@ app.post("/api/protected-route", checkJwt, async (req, res) => {
 
 // AI Plan Generation Route
 
-app.post("/vapi/generate-program", express.text(), async (req, res) => {
+app.post("/vapi/generate-program", async (req, res) => {
   console.log("req for /vapi/generate-program");
   try {
     const parsedBody = JSON.parse(req.body);
@@ -82,11 +82,6 @@ app.post("/vapi/generate-program", express.text(), async (req, res) => {
     } = parsedBody;
 
     console.log("user_id", user_id);
-
-    if (!user_id || !age || !weight || !height || !fitness_goal) {
-      console.log("Missing required fields");
-      return res.status(400).json({ message: "Missing required fields." });
-    }
 
     // Workout Prompt
     const workoutPrompt = `You are an experienced fitness coach creating a personalized workout plan based on:

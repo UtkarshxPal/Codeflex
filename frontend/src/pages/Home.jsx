@@ -65,10 +65,7 @@ function Home() {
                   asChild
                   className="overflow-hidden bg-primary text-primary-foreground px-8 py-6 text-lg font-medium"
                 >
-                  <Link
-                    to="/generate-program"
-                    className="flex items-center font-mono"
-                  >
+                  <Link to="/generate" className="flex items-center font-mono">
                     Build Your Program
                     <ArrowRightIcon className="ml-2 size-5" />
                   </Link>
