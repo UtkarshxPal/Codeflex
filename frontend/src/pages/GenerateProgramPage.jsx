@@ -13,7 +13,8 @@ function GenerateProgramPage() {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState("");
   const messageContainerRef = useRef(null);
-  const assistantId = "f01eda1c-d22e-41a6-81fb-da37b522d71a";
+  // const assistantId = "f01eda1c-d22e-41a6-81fb-da37b522d71a";
+  const assistantId = import.meta.env.VITE_VAPI_ASSISTANT_ID;
 
   const navigate = useNavigate();
   const { user } = useAuth0();
