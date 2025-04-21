@@ -63,6 +63,7 @@ app.post("/api/protected-route", checkJwt, async (req, res) => {
 // AI Plan Generation Route
 
 app.post("/vapi/generate-program", express.text(), async (req, res) => {
+  console.log("req for /vapi/generate-program");
   try {
     // const parsedBody = JSON.parse(req.body);
 
@@ -79,6 +80,12 @@ app.post("/vapi/generate-program", express.text(), async (req, res) => {
       fitness_level,
       dietary_restrictions,
     } = req.body;
+
+    console.log("user_id", user_id);
+
+    if (!user_id || !age || !weight || !height || !fitness_goal) {
+      return res.status(400).json({ message: "Missing required fields." });
+    }
 
     // Workout Prompt
     const workoutPrompt = `You are an experienced fitness coach creating a personalized workout plan based on:
@@ -171,7 +178,7 @@ app.post("/vapi/generate-program", express.text(), async (req, res) => {
     dietPlan = validateDietPlan(dietPlan);
 
     await Plan.updateMany(
-      { userID: user_id, isActive: true },
+      { userId: user_id, isActive: true },
       { $set: { isActive: false } }
     );
 
@@ -198,12 +205,15 @@ app.post("/vapi/generate-program", express.text(), async (req, res) => {
 
 app.get("/getplans/:id", async (req, res) => {
   try {
-    const id = req.params;
+    const { id } = req.params;
     if (!id) {
       return res.status(404).json({ message: "Please provide ID" });
     }
 
     const plans = await Plan.find({ userId: id }).sort({ createdAt: -1 });
+
+    console.log(plans);
+
     return res
       .status(200)
       .json({ plans: plans, message: "Fetched Plans succesfully" });
