@@ -2,8 +2,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-// const BASE_URL = "https://codeflex-wjlg.onrender.com";
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://codeflex-wjlg.onrender.com";
+// const BASE_URL = "http://localhost:5000";
 
 function ProfilePage() {
   const [allPlans, setAllPlans] = useState([]);
@@ -21,7 +21,7 @@ function ProfilePage() {
       }
     }
     fetchAllPlans();
-  });
+  }, [encodedUserId]);
 
   return <div>ProfilePage</div>;
 }

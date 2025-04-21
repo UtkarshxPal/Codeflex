@@ -65,7 +65,7 @@ app.post("/api/protected-route", checkJwt, async (req, res) => {
 app.post("/vapi/generate-program", express.text(), async (req, res) => {
   console.log("req for /vapi/generate-program");
   try {
-    // const parsedBody = JSON.parse(req.body);
+    const parsedBody = JSON.parse(req.body);
 
     console.log(req.body);
 
@@ -79,11 +79,12 @@ app.post("/vapi/generate-program", express.text(), async (req, res) => {
       workout_days,
       fitness_level,
       dietary_restrictions,
-    } = req.body;
+    } = parsedBody;
 
     console.log("user_id", user_id);
 
     if (!user_id || !age || !weight || !height || !fitness_goal) {
+      console.log("Missing required fields");
       return res.status(400).json({ message: "Missing required fields." });
     }
 
