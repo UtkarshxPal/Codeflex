@@ -51,6 +51,8 @@ function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
+          toastClassName="bg-white text-black text-sm md:text-base px-4 py-2 shadow-md rounded-md max-w-[90vw] sm:max-w-sm"
+          bodyClassName="flex items-center"
         />
       </BrowserRouter>
       {/* <Footer></Footer> */}
