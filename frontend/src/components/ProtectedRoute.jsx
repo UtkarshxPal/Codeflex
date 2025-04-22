@@ -1,16 +1,18 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Loader } from "lucide-react";
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useAuth0();
 
-  // if (isLoading)
-  //   return (
-  //     <div className="flex items-center justify-center min-h-screen">
-  //       <Loader></Loader>
-  //     </div>
-  //   );
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error("Please login First");
+    }
+  }, [isAuthenticated]);
+
   return isAuthenticated ? children : <Navigate to="/" replace />;
 }
 

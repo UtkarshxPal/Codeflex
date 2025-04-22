@@ -8,6 +8,7 @@ import GenerateProgramPage from "./pages/GenerateProgramPage";
 import ProfilePage from "./pages/ProfilePage";
 import { useAuth0 } from "@auth0/auth0-react";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -40,6 +41,17 @@ function App() {
             />
           </Routes>
         </main>
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </BrowserRouter>
       {/* <Footer></Footer> */}
     </div>
